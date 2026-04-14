@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroStep | Smart Neuro-Rehabilitation</title>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #3b82f6; /* Electric Blue */
+            --secondary: #8b5cf6; /* Purple */
+            --bg-dark: #05070a;
+            --card-bg: #0f172a;
+            --text-light: #f8fafc;
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.12), transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(59, 130, 246, 0.12), transparent 60%);
+            position: relative;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
+            opacity: 0.08;
+            z-index: -1;
+        }
+        header h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -3px;
+            margin-bottom: 16px;
+        }
+        header .subtitle {
+            font-size: 1.35rem;
+            max-width: 720px;
+            color: #e2e8f0;
+            margin-bottom: 12px;
+        }
+        header p {
+            font-size: 1.15rem;
+            max-width: 680px;
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn {
+            padding: 15px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.35);
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.45);
+        }
+        .btn-outline {
+            border: 2px solid #475569;
+            color: white;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--primary);
+        }
+        section {
+            padding: 110px 20px;
+            max-width: 1180px;
+            margin: auto;
+        }
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(to right, #f1f5f9, #64748b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            gap: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 42px 32px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card i {
+            color: var(--primary);
+            margin-bottom: 22px;
+        }
+        .highlight-box {
+            background: var(--accent-gradient);
+            padding: 60px 40px;
+            border-radius: 32px;
+            text-align: center;
+            color: white;
+        }
+        .highlight-box h2 {
+            -webkit-text-fill-color: white;
+            background: none;
+            margin-bottom: 24px;
+        }
+        .feature-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .feature-list li {
+            background: rgba(255,255,255,0.04);
+            padding: 18px 24px;
+            border-left: 5px solid var(--primary);
+            border-radius: 8px;
+            font-size: 1.05rem;
+        }
+        footer {
+            background: #02040a;
+            padding: 70px 20px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        footer p { color: #64748b; margin: 8px 0; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 3.2rem; }
+            section { padding: 80px 20px; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<header>
+    <div data-aos="fade-up">
+        <h1>NeuroStep</h1>
+        <p class="subtitle">Reimagining Neuro-Rehabilitation Through Smart Technology</p>
+        <p>Helping stroke and neurological patients regain movement — anytime, anywhere.</p>
+        <div class="btn-group">
+            <a href="mailto:njokikarany@gmail.com" class="btn btn-primary">Request Demo</a>
+            <a href="#" class="btn btn-outline">Watch Video</a>
+        </div>
+    </div>
+</header>
+
+<section id="about" data-aos="fade-up">
+    <div class="highlight-box">
+        <h2>About NeuroStep</h2>
+        <p style="font-size: 1.25rem; max-width: 820px; margin: auto;">
+            NeuroStep is a smart rehabilitation system designed to support patients recovering from neurological conditions such as stroke. 
+            By combining sensor technology and remote connectivity, NeuroStep enables continuous physiotherapy beyond the hospital — bringing care directly into the patient’s home.
+        </p>
+    </div>
+</section>
+
+<section id="how-it-works">
+    <h2 data-aos="fade-up">How It Works</h2>
+    <div class="grid">
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <i data-lucide="activity" size="42"></i>
+            <h3>Patient Uses Device</h3>
+            <p>The patient wears NeuroStep during therapy sessions at home or in clinic.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <i data-lucide="cpu" size="42"></i>
+            <h3>Sensors Capture Data</h3>
+            <p>Motion sensors track movement patterns and performance in real time.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <i data-lucide="wifi" size="42"></i>
+            <h3>Data Transmission</h3>
+            <p>Information is sent securely via Bluetooth/WiFi to the connected platform.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <i data-lucide="users" size="42"></i>
+            <h3>Remote Monitoring</h3>
+            <p>Physiotherapists monitor progress and provide guided feedback from anywhere.</p>
+        </div>
+    </div>
+</section>
+
+<section id="features" data-aos="fade-up">
+    <h2>Key Features</h2>
+    <div class="grid">
+        <div class="card">
+            <i data-lucide="move" size="42"></i>
+            <h3>Real-time Movement Tracking</h3>
+            <p>Precise sensors monitor lower-limb and gait patterns.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="zap" size="42"></i>
+            <h3>Adaptive Assistance</h3>
+            <p>AI adjusts support levels based on patient performance.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="bar-chart-3" size="42"></i>
+            <h3>Data-Driven Insights</h3>
+            <p>Progress reports and analytics for better recovery decisions.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="shield" size="42"></i>
+            <h3>Designed for Africa</h3>
+            <p>Portable, affordable, and built for low-resource settings.</p>
+        </div>
+    </div>
+</section>
+
+<section data-aos="fade-up">
+    <h2>Why NeuroStep Matters</h2>
+    <div class="grid">
+        <div class="card">
+            <i data-lucide="alert-circle" size="40"></i>
+            <h3>Recovery Doesn't Stop</h3>
+            <p>Patients continue high-quality therapy at home instead of losing progress after discharge.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="dollar-sign" size="40"></i>
+            <h3>Reduces Cost & Travel</h3>
+            <p>Eliminates frequent expensive trips to clinics.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="eye" size="40"></i>
+            <h3>Remote Oversight</h3>
+            <p>Physiotherapists stay connected and intervene early when needed.</p>
+        </div>
+    </div>
+</section>
+
+<section data-aos="fade-up">
+    <h2>Our Vision</h2>
+    <p style="text-align: center; font-size: 1.3rem; max-width: 800px; margin: 0 auto; color: #cbd5e1;">
+        To make intelligent, continuous neuro-rehabilitation accessible to every patient — regardless of location or resources.
+    </p>
+</section>
+
+<section style="text-align: center;" data-aos="zoom-in">
+    <h2>Get Involved</h2>
+    <p style="margin-bottom: 40px; font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Join us in transforming rehabilitation across Africa and beyond.
+    </p>
+    <a href="mailto:njokikarany@gmail.com" class="btn btn-primary" style="font-size: 1.1rem; padding: 18px 40px;">Contact Our Team</a>
+</section>
+
+<footer>
+    <p><strong>NeuroStep</strong> — Engineering Recovery. Empowering Movement.</p>
+    <p>Nairobi, Kenya</p>
+    <p style="margin-top: 30px;">&copy; 2026 NeuroStep. All Rights Reserved.</p>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true,
+        easing: 'ease-out-cubic'
+    });
+    lucide.createIcons();
+</script>
+</body>
+</html>
